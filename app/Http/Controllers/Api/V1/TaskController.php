@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api\V1;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\TaskRequest;
 use App\Models\Task;
+use App\Models\TodoList;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -15,9 +16,10 @@ class TaskController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(TodoList $todoList)
     {
-        return Task::all();
+        
+        return $todoList->tasks;
     }
 
     /**
@@ -26,9 +28,9 @@ class TaskController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(TaskRequest $request)
+    public function store(TaskRequest $request,TodoList $todoList)
     {
-        return Task::create($request->all());
+        return $todoList->tasks()->create($request->all());
     }
 
     /**
@@ -51,6 +53,7 @@ class TaskController extends Controller
      */
     public function update(TaskRequest $request, Task $task)
     {
+        // dd($request->validated());
        $task->update($request->all());
        return $task;
     }

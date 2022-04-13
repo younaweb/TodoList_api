@@ -24,7 +24,8 @@ class TaskRequest extends FormRequest
     public function rules()
     {
         return [
-            'title'=>'required'
+            'title'=>'required',
+            'todo_list_id'=>'sometimes|required',
         ];
     }
 }
