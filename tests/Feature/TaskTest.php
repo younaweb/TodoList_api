@@ -79,6 +79,16 @@ class TaskTest extends TestCase
     ->json();
     $this->assertDatabaseHas('tasks',['id'=>$task->id,'title'=>'updated']);
    }
+   /** @test */
+   public function status_can_be_updated()
+   {
+    // $task=$this->createTask(['todo_list_id'=>$this->list->id]);
+// dd($this->task);
+    $response=$this->patchJson(route('task.update',$this->task->id),['status'=>Task::STARTED,'title'=>$this->task->title])
+    ->assertOk()
+    ->json();
+    $this->assertDatabaseHas('tasks',['id'=>$this->task->id,'status'=>Task::STARTED]);
+   }
    
    /** @test */
    public function delete_task()

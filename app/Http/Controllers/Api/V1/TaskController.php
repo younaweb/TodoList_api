@@ -53,8 +53,9 @@ class TaskController extends Controller
      */
     public function update(TaskRequest $request, Task $task)
     {
-        // dd($request->validated());
-       $task->update($request->all());
+        // dd($request->all());
+      $task->update($request->all());
+   
        return $task;
     }
 

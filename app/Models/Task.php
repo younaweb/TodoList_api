@@ -8,7 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Task extends Model
 {
     use HasFactory;
-    protected $fillable=['title','todo_list_id'];
+    protected $fillable=['title','todo_list_id','status'];
+
+    const NOT_STARTED="not_started";
+    const STARTED="started";
+    const PENDING="pending";
 
     public function todo_list()
     {
